@@ -52,7 +52,7 @@ function newGame() {
       setGameElements();
 
       playerNameElem.innerHTML = player.name;
-      setGamePoints(); 
+      setGamePoints();
     }
   }
 function playerPick(playerPick) {
@@ -96,7 +96,8 @@ function checkRoundWinner(playerPick, computerPick) {
         computerResultElem.innerHTML = "Win!";
         computer.score++;
     }
-
+    setGamePoints();
+    endGame();
 }
 function playerPick(playerPick) {
     var computerPick = getComputerPick();
@@ -107,15 +108,22 @@ function playerPick(playerPick) {
     checkRoundWinner(playerPick, computerPick);
 }
 
-function playerPick(playerPick) {
-    var computerPick = getComputerPick();
-
-    playerPickElem.innerHTML = playerPick;
-    computerPickElem.innerHTML = computerPick;
-
-    checkRoundWinner(playerPick, computerPick);
-}
 function setGamePoints() {
     playerPointsElem.innerHTML = player.score;
     computerPointsElem.innerHTML = computer.score;
+}
+
+function endGame() {
+    if (player.score == 10) {
+        alert(' Wygrałeś!');
+        gameState = 'notStarted';
+        setGameElements();
+        newGameBtn.innerHTML = 'Gramy jeszcze raz ? '
+
+    } else if (computer.score == 10) {
+        alert( ' Przegrałeś!');
+        gameState = 'notStarted';
+        setGameElements();
+        newGameBtn.innerHTML = 'Gramy jeszcze raz ?'
+    }
 }
